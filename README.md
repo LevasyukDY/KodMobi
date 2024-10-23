@@ -1,5 +1,27 @@
-# Vue 3 + TypeScript + Vite
+# Реализация тестового задания KodMobi
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+![](https://img.shields.io/badge/node-20.18.0-green)
+![](https://img.shields.io/badge/npm-10.9.0-red)
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+**Задача:**
+Создать форму авторизации пользователя в системе через мобильный номер телефона
+
+**Условия:**
+
+1. Использовать сервис авторизации KodMobi. Реализовать методы "Сreate", "Send" и "Сheck" (метод "Verify" делать не нужно). В конце процесса авторизации пользователь должен иметь валидный verify_token (вывести его в консоль).
+2. Внешний вид формы должен соответствовать дизайну.
+
+3. Формат номеров телефонов должен соответствовать международному стандарту.
+
+4. Желательно, чтобы форма умела определять валидность номера телефона и могла сообщить об ошибке пользователю.
+
+5. Форма должна иметь локализацию (ру/англ) и возможность ее сменить.
+
+**Установка и запуск проекта:**
+
+```
+npm install
+```
+```
+npm run dev
+```
