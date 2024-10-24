@@ -1,7 +1,6 @@
 <script setup>
 import InputList from "../components/InputList.vue";
 import InputText from "../components/InputText.vue";
-import router from "../router";
 const { data } = defineProps(["data"]);
 const emit = defineEmits(["nextStep"]);
 

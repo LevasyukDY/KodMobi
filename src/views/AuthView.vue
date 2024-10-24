@@ -1,26 +1,18 @@
 <script setup>
 import InputText from "../components/InputText.vue";
 import InputList from "../components/InputList.vue";
-import router from "../router";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 const emit = defineEmits(["nextStep", "data"]);
 
 const country = ref(null);
 const phone = ref(null);
+const required = true;
+const pattern = "\\+\\d{1,3}\\s\\d{10}";
 
 const continueAuth = () => {
-  if (
-    country &&
-    phone &&
-    country.value?.length > 0 &&
-    phone.value?.length > 0
-  ) {
-    emit("nextStep", false);
-    emit("data", { country: country.value, phone: phone.value });
-  } else {
-    alert("AAAAAAAAAAAA");
-  }
+  emit("nextStep", false);
+  emit("data", { country: country.value.name, phone: phone.value });
 };
 
 const countryPhoneCodeList = ref([]);
@@ -50,23 +42,32 @@ onMounted(async () => {
       Чтобы войти или зарегистрироваться
     </p>
 
-    <InputList
-      class="mt-[30px]"
-      :data="countryPhoneCodeList"
-      @update:value="(el) => (country = el)"
-    >
-      Страна
-    </InputList>
+    <form @submit.prevent="continueAuth">
+      <InputList
+        class="mt-[30px]"
+        :data="countryPhoneCodeList"
+        @update:value="(el) => (country = el)"
+        :required
+      >
+        Страна
+      </InputList>
 
-    <InputText class="mt-[40px]" @update:value="(el) => (phone = el)">
-      Номер телефона
-    </InputText>
+      <InputText
+        class="mt-[40px]"
+        @update:value="(el) => (phone = el)"
+        :required
+        :pattern
+        :code="country?.dial_code"
+      >
+        Номер телефона
+      </InputText>
 
-    <button
-      class="mt-[50px] bg-[#007AFF] text-white h-[55px] w-full rounded hover:bg-[#3a99ff] transition-all font-medium"
-      @click="continueAuth"
-    >
-      Продолжить
-    </button>
+      <button
+        class="mt-[50px] bg-[#007AFF] text-white h-[55px] w-full rounded hover:bg-[#3a99ff] transition-all font-medium"
+        type="submit"
+      >
+        Продолжить
+      </button>
+    </form>
   </div>
 </template>

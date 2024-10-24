@@ -4,7 +4,7 @@ import InputText from "primevue/inputtext";
 import InputMenu from "./InputMenu.vue";
 import FloatLabel from "primevue/floatlabel";
 
-const { data } = defineProps(["data"]);
+const { data, required } = defineProps(["data", "required"]);
 const emit = defineEmits(["update:value"]);
 
 const value = ref(null);
@@ -13,7 +13,7 @@ const isShow = ref(false);
 const updateCountryValue = (el) => {
   value.value = el.name;
   isShow.value = false;
-  emit('update:value', value.value);
+  emit('update:value', el);
 };
 </script>
 
@@ -21,12 +21,12 @@ const updateCountryValue = (el) => {
   <div class="relative">
     <FloatLabel variant="on">
       <InputText
-        id="on_label"
         v-model="value"
         @input="$emit('update:value', value)"
         @click="isShow = !isShow"
+        :required
       />
-      <label for="on_label"><slot></slot></label>
+      <label><slot></slot></label>
       <img
         class="absolute top-1/2 -translate-y-1/2 right-5 -z-10"
         src="../assets/arrow.svg"

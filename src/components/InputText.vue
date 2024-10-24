@@ -1,19 +1,32 @@
 <script setup>
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 import { ref } from "vue";
 import InputText from "primevue/inputtext";
 import FloatLabel from "primevue/floatlabel";
 const value = ref(null);
+const { required, pattern, code } = defineProps([
+  "required",
+  "pattern",
+  "code",
+]);
+
+watch(
+  () => code,
+  (code) => {
+    value.value = code + " ";
+  }
+);
 </script>
 
 <template>
   <FloatLabel variant="on">
     <InputText
-      id="on_label"
       v-model="value"
       @input="$emit('update:value', value)"
+      :required
+      :pattern
     />
-    <label for="on_label"><slot></slot></label>
+    <label><slot></slot></label>
   </FloatLabel>
 </template>
 
