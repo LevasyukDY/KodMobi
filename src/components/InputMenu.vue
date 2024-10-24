@@ -31,10 +31,7 @@ defineEmits(["update:value"]);
       @click="$emit('update:value', el)"
     >
       <div class="flex items-center gap-2">
-        <img
-          src="../assets/search.svg"
-          alt=""
-        />
+        <img :src="el.img" alt="" />
         <span class="text-left">{{ el.name }}</span>
       </div>
       <span>{{ el.dial_code }}</span>

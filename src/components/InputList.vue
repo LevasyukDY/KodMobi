@@ -5,13 +5,15 @@ import InputMenu from "./InputMenu.vue";
 import FloatLabel from "primevue/floatlabel";
 
 const { data } = defineProps(["data"]);
+const emit = defineEmits(["update:value"]);
+
 const value = ref(null);
 const isShow = ref(false);
-const emit = defineEmits(["update:value"]);
 
 const updateCountryValue = (el) => {
   value.value = el.name;
-  emit('update:value', value.value)
+  isShow.value = false;
+  emit('update:value', value.value);
 };
 </script>
 
@@ -31,11 +33,7 @@ const updateCountryValue = (el) => {
         alt=""
       />
     </FloatLabel>
-    <InputMenu
-      :data="data"
-      :show="isShow"
-      @update:value="updateCountryValue"
-    />
+    <InputMenu :data="data" :show="isShow" @update:value="updateCountryValue" />
   </div>
 </template>
 

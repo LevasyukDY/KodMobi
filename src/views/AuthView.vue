@@ -29,7 +29,11 @@ async function fetchCountryPhoneCodes() {
   const countryPhoneCodeResponse = await axios.get(
     "https://gist.githubusercontent.com/DmytroLisitsyn/1c31186e5b66f1d6c52da6b5c70b12ad/raw/2bc71083a77106afec2ec37cf49d05ee54be1a22/country_dial_info.json"
   );
-  countryPhoneCodeList.value = countryPhoneCodeResponse.data;
+  countryPhoneCodeList.value = countryPhoneCodeResponse.data.map((val) => {
+    val["img"] =
+      "https://flagcdn.com/16x12/" + val["code"].toLowerCase() + ".png";
+    return val;
+  });
 }
 
 onMounted(async () => {
@@ -54,10 +58,7 @@ onMounted(async () => {
       Страна
     </InputList>
 
-    <InputText
-      class="mt-[40px]"
-      @update:value="(el) => (phone = el)"
-    >
+    <InputText class="mt-[40px]" @update:value="(el) => (phone = el)">
       Номер телефона
     </InputText>
 
