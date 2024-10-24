@@ -8,7 +8,11 @@ const value = ref(null);
 
 <template>
   <FloatLabel variant="on">
-    <InputText id="on_label" v-model="value" />
+    <InputText
+      id="on_label"
+      v-model="value"
+      @input="$emit('update:value', value)"
+    />
     <label for="on_label"><slot></slot></label>
   </FloatLabel>
 </template>

@@ -1,5 +1,9 @@
 <script setup lang="ts">
-// import MyInput from "./components/MyInput.vue";
+import AuthView from "./views/AuthView.vue";
+import VerifyView from "./views/VerifyView.vue";
+import { ref } from "vue";
+const isBeginOfAuth = ref(true);
+const data = ref(null);
 </script>
 
 <template>
@@ -12,7 +16,18 @@
       >
         <p>Логотип (Высота 40px, длина до 300px)</p>
       </div>
-      <RouterView />
+
+      <AuthView
+        v-show="isBeginOfAuth"
+        @nextStep="(el) => (isBeginOfAuth = el)"
+        @data="(el) => (data = el)"
+      />
+      <VerifyView
+        v-show="!isBeginOfAuth"
+        @nextStep="(el) => (isBeginOfAuth = el)"
+        :data="data"
+      />
+
       <div class="mt-[70px] w-full flex justify-between items-center text-xs">
         <div class="flex gap-3 items-center cursor-pointer">
           <span class="">Русский</span>

@@ -1,49 +1,41 @@
-<script setup>
-import { defineComponent, onMounted, toRef, watch } from "vue";
+<script setup lang="js">
 import { ref } from "vue";
 import InputText from "primevue/inputtext";
+import InputMenu from "./InputMenu.vue";
 import FloatLabel from "primevue/floatlabel";
 
 const { data } = defineProps(["data"]);
 const value = ref(null);
+const isShow = ref(false);
+const emit = defineEmits(["update:value"]);
+
+const updateCountryValue = (el) => {
+  value.value = el.name;
+  emit('update:value', value.value)
+};
 </script>
 
 <template>
   <div class="relative">
     <FloatLabel variant="on">
-      <InputText id="on_label" v-model="value" />
+      <InputText
+        id="on_label"
+        v-model="value"
+        @input="$emit('update:value', value)"
+        @click="isShow = !isShow"
+      />
       <label for="on_label"><slot></slot></label>
       <img
-        class="absolute top-1/2 -translate-y-1/2 right-5"
+        class="absolute top-1/2 -translate-y-1/2 right-5 -z-10"
         src="../assets/arrow.svg"
         alt=""
       />
     </FloatLabel>
-    <div
-      v-show="!!value"
-      class="km-scrollbar h-[319px] p-4 mt-1 w-full z-10 shadow-md shadow-gray-500 rounded bg-white absolute top-full left-0 overflow-y-auto"
-    >
-      <div class="relative mb-4">
-        <img
-          class="absolute top-1/2 -translate-y-1/2 left-3"
-          src="../assets/search.svg"
-          alt=""
-        />
-        <input
-          class="bg-gray-100 w-full h-[38px] rounded-lg pl-9"
-          placeholder="Поиск"
-          type="text"
-        />
-      </div>
-      <div
-        class="w-full h-[48px] px-3 flex items-center justify-between cursor-pointer hover:bg-gray-100 transition-all rounded-lg"
-        v-for="el in data"
-        :key="el.code"
-      >
-        <span>{{ el.name }}</span>
-        <span>{{ el.dial_code }}</span>
-      </div>
-    </div>
+    <InputMenu
+      :data="data"
+      :show="isShow"
+      @update:value="updateCountryValue"
+    />
   </div>
 </template>
 

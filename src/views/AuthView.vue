@@ -4,9 +4,23 @@ import InputList from "../components/InputList.vue";
 import router from "../router";
 import axios from "axios";
 import { onMounted, ref } from "vue";
+const emit = defineEmits(["nextStep", "data"]);
+
+const country = ref(null);
+const phone = ref(null);
 
 const continueAuth = () => {
-  router.push("/verify");
+  if (
+    country &&
+    phone &&
+    country.value?.length > 0 &&
+    phone.value?.length > 0
+  ) {
+    emit("nextStep", false);
+    emit("data", { country: country.value, phone: phone.value });
+  } else {
+    alert("AAAAAAAAAAAA");
+  }
 };
 
 const countryPhoneCodeList = ref([]);
@@ -24,21 +38,34 @@ onMounted(async () => {
 </script>
 
 <template>
-  <h1 class="text-3xl font-medium text-black mt-[30px]">
-    Введите номер телефона
-  </h1>
-  <p class="mt-[14px] text-[#666] font-normal text-base">
-    Чтобы войти или зарегистрироваться
-  </p>
+  <div>
+    <h1 class="text-3xl font-medium text-black mt-[30px]">
+      Введите номер телефона
+    </h1>
+    <p class="mt-[14px] text-[#666] font-normal text-base">
+      Чтобы войти или зарегистрироваться
+    </p>
 
-  <InputList class="mt-[30px]" :data="countryPhoneCodeList">Страна</InputList>
+    <InputList
+      class="mt-[30px]"
+      :data="countryPhoneCodeList"
+      @update:value="(el) => (country = el)"
+    >
+      Страна
+    </InputList>
 
-  <InputText class="mt-[40px]">Номер телефона</InputText>
+    <InputText
+      class="mt-[40px]"
+      @update:value="(el) => (phone = el)"
+    >
+      Номер телефона
+    </InputText>
 
-  <button
-    class="mt-[50px] bg-[#007AFF] text-white h-[55px] w-full rounded hover:bg-[#3a99ff] transition-all font-medium"
-    @click="continueAuth"
-  >
-    Продолжить
-  </button>
+    <button
+      class="mt-[50px] bg-[#007AFF] text-white h-[55px] w-full rounded hover:bg-[#3a99ff] transition-all font-medium"
+      @click="continueAuth"
+    >
+      Продолжить
+    </button>
+  </div>
 </template>
