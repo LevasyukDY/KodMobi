@@ -30,7 +30,8 @@
       },
       "code_sent_view": {
         "auth": "Login to the bot",
-        "check_status": "Check status"
+        "check_status": "Check status",
+        "description_after_check": "You are still not logged into the bot, please try again"
       }
     },
     "ru": {
@@ -61,7 +62,8 @@
       },
       "code_sent_view": {
         "auth": "Авторизоваться в боте",
-        "check_status": "Проверить статус"
+        "check_status": "Проверить статус",
+        "description_after_check": "Вы все еще не авторизованы в боте, пожалуйста, повторите попытку"
       }
     }
   }

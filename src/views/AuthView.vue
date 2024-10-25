@@ -4,7 +4,7 @@ import InputText from "../components/InputText.vue";
 import InputList from "../components/InputList.vue";
 import { API_KEY } from "../config.ts";
 import { onMounted, ref } from "vue";
-import { ICountryCode } from "../types/types";
+import { ICountryCode, ICreateResponse } from "../types/types";
 
 const emit = defineEmits(["nextStep", "data"]);
 
@@ -36,7 +36,7 @@ const continueAuth = async () => {
   };
 
   try {
-    const response = await axios(config);
+    const response = await axios<ICreateResponse>(config);
     emit("nextStep", false);
     if (!country.value) throw new Error("phone.value = null");
     emit("data", {

@@ -30,7 +30,6 @@ const filteredArray = computed<TCountryCodes>(() => {
       <img
         class="absolute top-1/2 -translate-y-1/2 left-3"
         src="../assets/search.svg"
-        alt=""
       />
       <input
         class="bg-gray-100 w-full h-[38px] rounded-lg pl-9"
@@ -38,8 +37,14 @@ const filteredArray = computed<TCountryCodes>(() => {
         type="text"
         v-model="searchQuery"
       />
+      <img
+        v-show="searchQuery && searchQuery.length > 0"
+        class="absolute w-4 h-4 top-1/2 -translate-y-1/2 right-3"
+        src="../assets/clear.svg"
+        @click="searchQuery = ''"
+      />
     </div>
-    <span v-show="filteredArray.length === 0">{{
+    <span class="text-gray-400" v-show="filteredArray.length === 0">{{
       $t("input_menu.nothing_found")
     }}</span>
     <div
@@ -52,7 +57,7 @@ const filteredArray = computed<TCountryCodes>(() => {
         <img :src="el.img" alt="" />
         <span class="text-left">{{ el.name }}</span>
       </div>
-      <span>{{ el.dial_code }}</span>
+      <span class="font-bold">{{ el.dial_code }}</span>
     </div>
   </div>
 </template>

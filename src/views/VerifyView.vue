@@ -4,7 +4,7 @@ import InputList from "../components/InputList.vue";
 import InputText from "../components/InputText.vue";
 import { ref } from "vue";
 import { API_KEY } from "../config.ts";
-import { ISocials } from "../types/types.ts";
+import { ICheckResponse, ISendResponse, ISocials } from "../types/types.ts";
 
 const props = defineProps(["data"]);
 const emit = defineEmits(["nextStep", "socialsData", "isShowCodeSentView"]);
@@ -51,7 +51,7 @@ const sendCode = async () => {
     };
 
     try {
-      const response = await axios(config);
+      const response = await axios<ISendResponse>(config);
       emit("socialsData", response.data);
       emit("isShowCodeSentView", true);
     } catch (e) {
@@ -93,7 +93,7 @@ const goNext = async () => {
   };
 
   try {
-    const response = await axios(config);
+    const response = await axios<ICheckResponse>(config);
     console.log(response.data);
   } catch (e) {
     console.error(e);
