@@ -8,7 +8,7 @@ const emit = defineEmits(["nextStep", "data"]);
 const country = ref(null);
 const phone = ref(null);
 const required = true;
-const pattern = "\\+\\d{1,3}\\s\\d{10}";
+const pattern = "\\+\\d{1,4}\\s\\d{10}";
 
 const continueAuth = () => {
   emit("nextStep", false);
@@ -36,10 +36,10 @@ onMounted(async () => {
 <template>
   <div>
     <h1 class="text-3xl font-medium text-black mt-[30px]">
-      Введите номер телефона
+      {{ $t("auth_view.enter_phone") }}
     </h1>
     <p class="mt-[14px] text-[#666] font-normal text-base">
-      Чтобы войти или зарегистрироваться
+      {{ $t("auth_view.enter_phone_description") }}
     </p>
 
     <form @submit.prevent="continueAuth">
@@ -49,7 +49,7 @@ onMounted(async () => {
         @update:value="(el) => (country = el)"
         :required
       >
-        Страна
+        {{ $t("auth_view.country_input") }}
       </InputList>
 
       <InputText
@@ -59,14 +59,14 @@ onMounted(async () => {
         :pattern
         :code="country?.dial_code"
       >
-        Номер телефона
+        {{ $t("auth_view.phone_number_input") }}
       </InputText>
 
       <button
         class="mt-[50px] bg-[#007AFF] text-white h-[55px] w-full rounded hover:bg-[#3a99ff] transition-all font-medium"
         type="submit"
       >
-        Продолжить
+        {{ $t("auth_view.continue") }}
       </button>
     </form>
   </div>

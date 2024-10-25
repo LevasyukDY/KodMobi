@@ -18,31 +18,39 @@ const socialsList = [
 
 <template>
   <div>
-    <h1 class="text-3xl font-medium text-black mt-[30px]">Введите код</h1>
+    <h1 class="text-3xl font-medium text-black mt-[30px]">
+      {{ $t("verify_view.enter_code") }}
+    </h1>
     <p class="mt-[14px] text-[#666] font-normal text-base">
-      Отправлен по номеру {{ data?.phone }}
+      {{ $t("verify_view.enter_code_description") }} {{ data?.phone }}
     </p>
 
-    <InputList class="mt-[30px]" :data="socialsList">
-      Способ получения кода
+    <InputList
+      class="mt-[30px]"
+      :data="socialsList"
+    >
+      {{ $t("verify_view.socials_input") }}
     </InputList>
 
-    <InputText class="mt-[40px]">Введите код</InputText>
+    <InputText class="mt-[40px]">{{ $t("verify_view.enter_code") }}</InputText>
 
     <div class="mt-[50px] flex justify-between gap-5">
       <div class="h-[55px] w-full flex items-center justify-center gap-3">
-        <img src="../assets/arrow-left.svg" alt="" />
+        <img
+          src="../assets/arrow-left.svg"
+          alt=""
+        />
         <button
           class="bg-transparent text-[#007AFF] hover:text-[#3a99ff] transition-all font-medium"
           @click="goBack"
         >
-          Назад
+          {{ $t("verify_view.btn_back") }}
         </button>
       </div>
       <button
         class="bg-[#007AFF] text-white h-[55px] w-full rounded hover:bg-[#3a99ff] transition-all font-medium"
       >
-        Продолжить
+        {{ $t("verify_view.btn_next") }}
       </button>
     </div>
   </div>

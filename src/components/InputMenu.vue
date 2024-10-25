@@ -8,7 +8,7 @@ defineEmits(["update:value"]);
 <template>
   <div
     v-show="show"
-    class="km-scrollbar h-[319px] p-4 mt-1 w-full z-10 shadow-md shadow-gray-500 rounded bg-white absolute top-full left-0 overflow-y-auto"
+    class="km-scrollbar max-h-[319px] p-4 mt-1 w-full z-10 shadow-md shadow-gray-500 rounded bg-white absolute top-full left-0 overflow-y-auto"
   >
     <div class="relative mb-4">
       <img
@@ -18,7 +18,7 @@ defineEmits(["update:value"]);
       />
       <input
         class="bg-gray-100 w-full h-[38px] rounded-lg pl-9"
-        placeholder="Поиск"
+        :placeholder="$t('input_menu.search_placeholder')"
         type="text"
         v-model="searchQuery"
         @input="filterArray"
@@ -31,7 +31,10 @@ defineEmits(["update:value"]);
       @click="$emit('update:value', el)"
     >
       <div class="flex items-center gap-2">
-        <img :src="el.img" alt="" />
+        <img
+          :src="el.img"
+          alt=""
+        />
         <span class="text-left">{{ el.name }}</span>
       </div>
       <span>{{ el.dial_code }}</span>

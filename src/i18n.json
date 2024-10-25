@@ -1,0 +1,56 @@
+{
+  "locale": "ru",
+  "fallbackLocale": "en",
+  "messages": {
+    "en": {
+      "app": {
+        "logo": "Logo (Height 40px, length up to 300px)",
+        "language": "English",
+        "conditions": "Conditions",
+        "confidentiality": "Confidentiality"
+      },
+      "auth_view": {
+        "enter_phone": "Enter phone number",
+        "enter_phone_description": "For auth and register",
+        "country_input": "Country",
+        "phone_number_input": "Phone number",
+        "continue": "Continue"
+      },
+      "input_menu": {
+        "search_placeholder": "Search"
+      },
+      "verify_view": {
+        "enter_code": "Enter code",
+        "enter_code_description": "Send on number",
+        "socials_input": "How to get the code",
+        "btn_back": "Back",
+        "btn_next": "Continue"
+      }
+    },
+    "ru": {
+      "app": {
+        "logo": "Логотип (Высота 40px, длина до 300px)",
+        "language": "Русский",
+        "conditions": "Условия",
+        "confidentiality": "Конфиденциальность"
+      },
+      "auth_view": {
+        "enter_phone": "Введите номер телефона",
+        "enter_phone_description": "Чтобы войти или зарегистрироваться",
+        "country_input": "Страна",
+        "phone_number_input": "Номер телефона",
+        "continue": "Продолжить"
+      },
+      "input_menu": {
+        "search_placeholder": "Поиск"
+      },
+      "verify_view": {
+        "enter_code": "Введите код",
+        "enter_code_description": "Отправлен по номеру",
+        "socials_input": "Способ получения кода",
+        "btn_back": "Назад",
+        "btn_next": "Продолжить"
+      }
+    }
+  }
+}

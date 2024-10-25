@@ -1,9 +1,26 @@
 <script setup lang="ts">
 import AuthView from "./views/AuthView.vue";
 import VerifyView from "./views/VerifyView.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { i18n } from "./main.ts";
 const isBeginOfAuth = ref(true);
 const data = ref(null);
+const isShowLanguageMenu = ref(false);
+
+const showLanguageMenu = () => {
+  isShowLanguageMenu.value = !isShowLanguageMenu.value;
+};
+const changeLang = (value: "ru" | "en") => {
+  i18n.global.locale = value;
+  localStorage.setItem("i18n", value);
+  showLanguageMenu();
+};
+
+onMounted(() => {
+  const locale = localStorage.getItem("i18n");
+  if ((locale && locale === "ru") || locale === "en")
+    i18n.global.locale = locale;
+});
 </script>
 
 <template>
@@ -14,7 +31,7 @@ const data = ref(null);
       <div
         class="bg-gray-100 h-[40px] w-[300px] mx-auto mt-[50px] text-gray-400 flex items-center justify-center"
       >
-        <p>Логотип (Высота 40px, длина до 300px)</p>
+        <p>{{ $t("app.logo") }}</p>
       </div>
 
       <AuthView
@@ -29,16 +46,38 @@ const data = ref(null);
       />
 
       <div class="mt-[70px] w-full flex justify-between items-center text-xs">
-        <div class="flex gap-3 items-center cursor-pointer">
-          <span class="">Русский</span>
+        <div class="flex gap-1 items-center relative">
+          <span
+            @click="showLanguageMenu"
+            class="cursor-pointer"
+            >{{ $t("app.language") }}</span
+          >
           <img
-            class="size-3"
+            class="size-3 cursor-pointer"
+            @click="showLanguageMenu"
             src="./assets/v-icon.svg"
           />
+          <div
+            v-show="isShowLanguageMenu"
+            class="bg-white w-full h-10 absolute left-0 top-5 shadow-md shadow-gray-400 rounded p-1 z-10"
+          >
+            <div
+              class="hover:bg-gray-100 transition-all cursor-pointer"
+              @click="() => changeLang('ru')"
+            >
+              Русский
+            </div>
+            <div
+              class="hover:bg-gray-100 transition-all cursor-pointer"
+              @click="() => changeLang('en')"
+            >
+              English
+            </div>
+          </div>
         </div>
         <div class="flex gap-6 items-center">
-          <a href="">Условия</a>
-          <a href="">Конфиденциальность</a>
+          <a href="">{{ $t("app.conditions") }}</a>
+          <a href="">{{ $t("app.confidentiality") }}</a>
         </div>
       </div>
     </div>
