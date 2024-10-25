@@ -1,10 +1,24 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { TCountryCodes } from "../types/types";
 
-const { data, show } = defineProps(["data", "show"]);
+const { data, show } = defineProps<{ data: TCountryCodes; show: boolean }>();
 defineEmits(["update:value"]);
 
-const searchQuery = ref(null);
+const searchQuery = ref<string | null>(null);
+
+const filteredArray = computed<TCountryCodes>(() => {
+  if (searchQuery.value && searchQuery.value.length > 0)
+    return data.filter(({ name }) =>
+      [name].some((val) => {
+        if (searchQuery.value)
+          return val.toLowerCase().includes(searchQuery.value.toLowerCase());
+      })
+    );
+  else {
+    return data;
+  }
+});
 </script>
 
 <template>
@@ -25,9 +39,12 @@ const searchQuery = ref(null);
         v-model="searchQuery"
       />
     </div>
+    <span v-show="filteredArray.length === 0">{{
+      $t("input_menu.nothing_found")
+    }}</span>
     <div
       class="w-full h-[48px] px-3 flex items-center justify-between cursor-pointer hover:bg-gray-100 transition-all rounded-lg"
-      v-for="el in data"
+      v-for="el in filteredArray"
       :key="el.code"
       @click="$emit('update:value', el)"
     >

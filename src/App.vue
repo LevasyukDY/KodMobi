@@ -34,9 +34,10 @@ onMounted(() => {
       class="relative w-[500px] h-[594px] rounded-[8px] border-[1px] pb-[24px] px-[29px]"
     >
       <div
-        class="bg-gray-100 h-[40px] w-[300px] mx-auto mt-[50px] text-gray-400 flex items-center justify-center"
+        class="h-[40px] w-[300px] mx-auto mt-[50px] text-gray-400 flex items-center justify-center"
       >
-        <p>{{ $t("app.logo") }}</p>
+        <!-- <p>{{ $t("app.logo") }}</p> -->
+        <img src="./assets/logo.svg" class="h-full" alt="" />
       </div>
 
       <AuthView

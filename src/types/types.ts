@@ -1,4 +1,4 @@
-export type TCountryCodes = ICountryCode[];
+export type TCountryCodes = Array<ICountryCode>;
 
 export interface ICountryCode {
   name: string;

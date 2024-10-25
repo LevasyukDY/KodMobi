@@ -17,7 +17,8 @@
         "continue": "Continue"
       },
       "input_menu": {
-        "search_placeholder": "Search"
+        "search_placeholder": "Search",
+        "nothing_found": "Nothing found"
       },
       "verify_view": {
         "enter_code": "Enter code",
@@ -47,7 +48,8 @@
         "continue": "Продолжить"
       },
       "input_menu": {
-        "search_placeholder": "Поиск"
+        "search_placeholder": "Поиск",
+        "nothing_found": "Ничего не найдено"
       },
       "verify_view": {
         "enter_code": "Введите код",
