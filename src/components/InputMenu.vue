@@ -1,8 +1,10 @@
-<script setup>
-import { ref, reactive, onMounted } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
+
 const { data, show } = defineProps(["data", "show"]);
-const searchQuery = ref(null);
 defineEmits(["update:value"]);
+
+const searchQuery = ref(null);
 </script>
 
 <template>
@@ -21,7 +23,6 @@ defineEmits(["update:value"]);
         :placeholder="$t('input_menu.search_placeholder')"
         type="text"
         v-model="searchQuery"
-        @input="filterArray"
       />
     </div>
     <div
@@ -31,10 +32,7 @@ defineEmits(["update:value"]);
       @click="$emit('update:value', el)"
     >
       <div class="flex items-center gap-2">
-        <img
-          :src="el.img"
-          alt=""
-        />
+        <img :src="el.img" alt="" />
         <span class="text-left">{{ el.name }}</span>
       </div>
       <span>{{ el.dial_code }}</span>

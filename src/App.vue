@@ -4,6 +4,7 @@ import VerifyView from "./views/VerifyView.vue";
 import CodeSentView from "./views/CodeSentView.vue";
 import { onMounted, ref } from "vue";
 import { i18n } from "./main.ts";
+
 const isBeginOfAuth = ref(true);
 const data = ref(null);
 const socialsData = ref(null);
@@ -13,6 +14,7 @@ const isShowCodeSentView = ref(false);
 const showLanguageMenu = () => {
   isShowLanguageMenu.value = !isShowLanguageMenu.value;
 };
+
 const changeLang = (value: "ru" | "en") => {
   i18n.global.locale = value;
   localStorage.setItem("i18n", value);
@@ -57,11 +59,9 @@ onMounted(() => {
 
       <div class="mt-[70px] w-full flex justify-between items-center text-xs">
         <div class="flex gap-1 items-center relative">
-          <span
-            @click="showLanguageMenu"
-            class="cursor-pointer"
-            >{{ $t("app.language") }}</span
-          >
+          <span @click="showLanguageMenu" class="cursor-pointer">{{
+            $t("app.language")
+          }}</span>
           <img
             class="size-3 cursor-pointer"
             @click="showLanguageMenu"

@@ -1,19 +1,20 @@
-<script setup lang="js">
-import { ref } from "vue";
+<script setup lang="ts">
 import InputText from "primevue/inputtext";
 import InputMenu from "./InputMenu.vue";
 import FloatLabel from "primevue/floatlabel";
+import { ICountryCode } from "../types/types";
+import { ref } from "vue";
 
 const { data, required } = defineProps(["data", "required"]);
 const emit = defineEmits(["update:value"]);
 
-const value = ref(null);
+const value = ref<string | null>(null);
 const isShow = ref(false);
 
-const updateCountryValue = (el) => {
+const updateCountryValue = (el: ICountryCode) => {
   value.value = el.name;
   isShow.value = false;
-  emit('update:value', el);
+  emit("update:value", el);
 };
 </script>
 

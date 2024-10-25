@@ -1,9 +1,11 @@
-<script setup>
-import { defineComponent, watch } from "vue";
-import { ref } from "vue";
+<script setup lang="ts">
 import InputText from "primevue/inputtext";
 import FloatLabel from "primevue/floatlabel";
-const value = ref(null);
+import { watch } from "vue";
+import { ref } from "vue";
+
+const value = ref<string | null>(null);
+
 const { required, pattern, code } = defineProps([
   "required",
   "pattern",

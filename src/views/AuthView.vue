@@ -1,17 +1,21 @@
-<script setup>
+<script setup lang="ts">
+import axios from "axios";
 import InputText from "../components/InputText.vue";
 import InputList from "../components/InputList.vue";
-import { API_KEY } from "../config";
-import axios from "axios";
+import { API_KEY } from "../config.ts";
 import { onMounted, ref } from "vue";
+import { ICountryCode } from "../types/types";
+
 const emit = defineEmits(["nextStep", "data"]);
 
-const country = ref(null);
-const phone = ref(null);
+const countryPhoneCodeList = ref([]);
+const country = ref<ICountryCode | null>(null);
+const phone = ref<string | null>(null);
 const required = true;
 const pattern = "\\+\\d{1,4}\\s\\d{10}";
 
 const continueAuth = async () => {
+  if (!phone.value) throw new Error("phone.value = null");
   const data = JSON.stringify({
     to: phone.value.replaceAll(" ", ""),
     type: "telegram",
@@ -34,6 +38,7 @@ const continueAuth = async () => {
   try {
     const response = await axios(config);
     emit("nextStep", false);
+    if (!country.value) throw new Error("phone.value = null");
     emit("data", {
       country: country.value.name,
       phone: phone.value,
@@ -44,18 +49,18 @@ const continueAuth = async () => {
   }
 };
 
-const countryPhoneCodeList = ref([]);
-
 async function fetchCountryPhoneCodes() {
   try {
     const countryPhoneCodeResponse = await axios.get(
       "https://gist.githubusercontent.com/DmytroLisitsyn/1c31186e5b66f1d6c52da6b5c70b12ad/raw/2bc71083a77106afec2ec37cf49d05ee54be1a22/country_dial_info.json"
     );
-    countryPhoneCodeList.value = countryPhoneCodeResponse.data.map((val) => {
-      val["img"] =
-        "https://flagcdn.com/16x12/" + val["code"].toLowerCase() + ".png";
-      return val;
-    });
+    countryPhoneCodeList.value = countryPhoneCodeResponse.data.map(
+      (val: ICountryCode) => {
+        val["img"] =
+          "https://flagcdn.com/16x12/" + val["code"].toLowerCase() + ".png";
+        return val;
+      }
+    );
   } catch (e) {
     console.error(e);
   }

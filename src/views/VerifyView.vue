@@ -1,14 +1,16 @@
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import axios from "axios";
 import InputList from "../components/InputList.vue";
 import InputText from "../components/InputText.vue";
-import { API_KEY } from "../config";
-import axios from "axios";
+import { ref } from "vue";
+import { API_KEY } from "../config.ts";
+import { ISocials } from "../types/types.ts";
+
 const props = defineProps(["data"]);
 const emit = defineEmits(["nextStep", "socialsData", "isShowCodeSentView"]);
 
-const social = ref(null);
-const code = ref(null);
+const social = ref<ISocials | null>(null);
+const code = ref<number | null>(null);
 const timer = ref("0:30");
 const isShowTimer = ref(false);
 const required = true;
@@ -25,6 +27,7 @@ const socialsList = [
 ];
 
 const sendCode = async () => {
+  if (!social.value) throw new Error("social.value равен null или undefined");
   if (social && social.value?.code > 0) {
     let i = 30;
     isShowTimer.value = true;
@@ -55,14 +58,14 @@ const sendCode = async () => {
       console.error(e);
     }
 
-    await new Promise((resolve, reject) => {
+    await new Promise((resolve, _) => {
       let intervalId = setInterval(() => {
         if (i < 10) timer.value = "0:0" + i;
         else if (i < 60) timer.value = "0:" + i;
         i--;
         if (i === 0) {
           clearInterval(intervalId);
-          resolve();
+          resolve("");
         }
       }, 1000);
     });
@@ -73,7 +76,7 @@ const sendCode = async () => {
 const goNext = async () => {
   const data = JSON.stringify({
     session_id: props.data?.session_id,
-    code: toString(code),
+    code: code.toString(),
   });
 
   const config = {
@@ -133,10 +136,7 @@ const goNext = async () => {
           >
             {{ $t("verify_view.send_btn") }}
           </button>
-          <span
-            v-show="isShowTimer"
-            class="text-gray-400"
-          >
+          <span v-show="isShowTimer" class="text-gray-400">
             {{ timer }}
           </span>
         </div>
@@ -144,10 +144,7 @@ const goNext = async () => {
 
       <div class="mt-[50px] flex justify-between gap-5">
         <div class="h-[55px] w-full flex items-center justify-center gap-3">
-          <img
-            src="../assets/arrow-left.svg"
-            alt=""
-          />
+          <img src="../assets/arrow-left.svg" alt="" />
           <button
             class="bg-transparent text-[#007AFF] hover:text-[#3a99ff] transition-all font-medium"
             @click="goBack"

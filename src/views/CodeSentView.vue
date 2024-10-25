@@ -1,6 +1,7 @@
-<script setup>
+<script setup lang="ts">
 const emit = defineEmits(["isShowCodeSentView"]);
 const props = defineProps(["data"]);
+
 const goBack = () => {
   emit("isShowCodeSentView", false);
 };
