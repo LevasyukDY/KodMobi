@@ -95,6 +95,7 @@ const goNext = async () => {
   try {
     const response = await axios<ICheckResponse>(config);
     console.log(response.data);
+    alert(JSON.stringify(response.data, null, 2));
   } catch (e) {
     console.error(e);
   }
