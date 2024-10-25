@@ -76,7 +76,7 @@ const sendCode = async () => {
 const goNext = async () => {
   const data = JSON.stringify({
     session_id: props.data?.session_id,
-    code: code.toString(),
+    code: code.value,
   });
 
   const config = {
