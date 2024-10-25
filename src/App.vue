@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import AuthView from "./views/AuthView.vue";
 import VerifyView from "./views/VerifyView.vue";
+import CodeSentView from "./views/CodeSentView.vue";
 import { onMounted, ref } from "vue";
 import { i18n } from "./main.ts";
 const isBeginOfAuth = ref(true);
 const data = ref(null);
+const socialsData = ref(null);
 const isShowLanguageMenu = ref(false);
+const isShowCodeSentView = ref(false);
 
 const showLanguageMenu = () => {
   isShowLanguageMenu.value = !isShowLanguageMenu.value;
@@ -26,7 +29,7 @@ onMounted(() => {
 <template>
   <main>
     <div
-      class="w-[500px] h-[594px] rounded-[8px] border-[1px] pb-[24px] px-[29px]"
+      class="relative w-[500px] h-[594px] rounded-[8px] border-[1px] pb-[24px] px-[29px]"
     >
       <div
         class="bg-gray-100 h-[40px] w-[300px] mx-auto mt-[50px] text-gray-400 flex items-center justify-center"
@@ -42,7 +45,14 @@ onMounted(() => {
       <VerifyView
         v-show="!isBeginOfAuth"
         @nextStep="(el) => (isBeginOfAuth = el)"
+        @socialsData="(el) => (socialsData = el)"
+        @isShowCodeSentView="(el) => (isShowCodeSentView = el)"
         :data="data"
+      />
+      <CodeSentView
+        v-show="isShowCodeSentView"
+        :data="socialsData"
+        @isShowCodeSentView="(el) => (isShowCodeSentView = el)"
       />
 
       <div class="mt-[70px] w-full flex justify-between items-center text-xs">

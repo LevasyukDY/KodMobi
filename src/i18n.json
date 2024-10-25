@@ -24,7 +24,12 @@
         "enter_code_description": "Send on number",
         "socials_input": "How to get the code",
         "btn_back": "Back",
-        "btn_next": "Continue"
+        "btn_next": "Continue",
+        "send_btn": "Send"
+      },
+      "code_sent_view": {
+        "auth": "Login to the bot",
+        "check_status": "Check status"
       }
     },
     "ru": {
@@ -49,7 +54,12 @@
         "enter_code_description": "Отправлен по номеру",
         "socials_input": "Способ получения кода",
         "btn_back": "Назад",
-        "btn_next": "Продолжить"
+        "btn_next": "Продолжить",
+        "send_btn": "Отправить"
+      },
+      "code_sent_view": {
+        "auth": "Авторизоваться в боте",
+        "check_status": "Проверить статус"
       }
     }
   }

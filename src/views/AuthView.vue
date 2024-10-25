@@ -1,6 +1,7 @@
 <script setup>
 import InputText from "../components/InputText.vue";
 import InputList from "../components/InputList.vue";
+import { API_KEY } from "../config";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 const emit = defineEmits(["nextStep", "data"]);
@@ -10,22 +11,54 @@ const phone = ref(null);
 const required = true;
 const pattern = "\\+\\d{1,4}\\s\\d{10}";
 
-const continueAuth = () => {
-  emit("nextStep", false);
-  emit("data", { country: country.value.name, phone: phone.value });
+const continueAuth = async () => {
+  const data = JSON.stringify({
+    to: phone.value.replaceAll(" ", ""),
+    type: "telegram",
+    send: false,
+  });
+
+  const config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: "https://api.kodmobi.aggone.net/v2/create",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Accept-Language": "en",
+      "x-api-key": API_KEY,
+    },
+    data: data,
+  };
+
+  try {
+    const response = await axios(config);
+    emit("nextStep", false);
+    emit("data", {
+      country: country.value.name,
+      phone: phone.value,
+      session_id: response.data.session_id,
+    });
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 const countryPhoneCodeList = ref([]);
 
 async function fetchCountryPhoneCodes() {
-  const countryPhoneCodeResponse = await axios.get(
-    "https://gist.githubusercontent.com/DmytroLisitsyn/1c31186e5b66f1d6c52da6b5c70b12ad/raw/2bc71083a77106afec2ec37cf49d05ee54be1a22/country_dial_info.json"
-  );
-  countryPhoneCodeList.value = countryPhoneCodeResponse.data.map((val) => {
-    val["img"] =
-      "https://flagcdn.com/16x12/" + val["code"].toLowerCase() + ".png";
-    return val;
-  });
+  try {
+    const countryPhoneCodeResponse = await axios.get(
+      "https://gist.githubusercontent.com/DmytroLisitsyn/1c31186e5b66f1d6c52da6b5c70b12ad/raw/2bc71083a77106afec2ec37cf49d05ee54be1a22/country_dial_info.json"
+    );
+    countryPhoneCodeList.value = countryPhoneCodeResponse.data.map((val) => {
+      val["img"] =
+        "https://flagcdn.com/16x12/" + val["code"].toLowerCase() + ".png";
+      return val;
+    });
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 onMounted(async () => {
