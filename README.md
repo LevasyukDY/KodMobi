@@ -38,7 +38,7 @@
 docker build -t kodmobi .
 ```
 ```
-docker run -d --name kodmobi --restart unless-stopped -p 5173:4242 kodmobi
+docker run -d --name kodmobi --restart unless-stopped -p 4242:4242 kodmobi
 ```
 
 Через npm:
