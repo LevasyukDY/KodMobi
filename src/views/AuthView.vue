@@ -101,7 +101,7 @@ onMounted(async () => {
       </InputText>
 
       <button
-        class="mt-[50px] bg-[#007AFF] text-white h-[55px] w-full rounded hover:bg-[#3a99ff] transition-all font-medium"
+        class="mt-[50px] bg-[--primary-color] text-white h-[55px] w-full rounded hover:bg-[--primary-color-hover] transition-all font-medium"
         type="submit"
       >
         {{ $t("auth_view.continue") }}

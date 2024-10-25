@@ -44,13 +44,13 @@ const checkStatus = async () => {
       <a
         :href="props.data?.channel.link"
         target="_blank"
-        class="mt-[70px] py-[16px] bg-[#007AFF] text-white h-[55px] w-full text-center rounded hover:bg-[#3a99ff] transition-all font-medium"
+        class="mt-[70px] py-[16px] bg-[--primary-color] text-white h-[55px] w-full text-center rounded hover:bg-[--primary-color-hover] transition-all font-medium"
       >
         {{ $t("code_sent_view.auth") }}
       </a>
       <div class="mt-[20px]">
         <button
-          class="text-[#007AFF] hover:text-[#3a99ff] transition-all font-medium"
+          class="text-[--primary-color] hover:text-[--primary-color-hover] transition-all font-medium"
           v-show="isShowCheckBtn"
           @click="checkStatus"
         >

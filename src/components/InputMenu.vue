@@ -47,7 +47,8 @@ const filteredArray = computed<TCountryCodes>(() => {
     <span class="text-gray-400" v-show="filteredArray.length === 0">{{
       $t("input_menu.nothing_found")
     }}</span>
-    <div
+
+    <button
       class="w-full h-[48px] px-3 flex items-center justify-between cursor-pointer hover:bg-gray-100 transition-all rounded-lg"
       v-for="el in filteredArray"
       :key="el.code"
@@ -58,6 +59,6 @@ const filteredArray = computed<TCountryCodes>(() => {
         <span class="text-left">{{ el.name }}</span>
       </div>
       <span class="font-bold">{{ el.dial_code }}</span>
-    </div>
+    </button>
   </div>
 </template>

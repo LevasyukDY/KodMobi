@@ -60,9 +60,9 @@ onMounted(() => {
 
       <div class="mt-[70px] w-full flex justify-between items-center text-xs">
         <div class="flex gap-1 items-center relative">
-          <span @click="showLanguageMenu" class="cursor-pointer">{{
-            $t("app.language")
-          }}</span>
+          <button @click="showLanguageMenu" class="cursor-pointer">
+            {{ $t("app.language") }}
+          </button>
           <img
             class="size-3 cursor-pointer"
             @click="showLanguageMenu"
@@ -72,18 +72,18 @@ onMounted(() => {
             v-show="isShowLanguageMenu"
             class="bg-white w-full h-10 absolute left-0 top-5 shadow-md shadow-gray-400 rounded p-1 z-10"
           >
-            <div
+            <button
               class="hover:bg-gray-100 transition-all cursor-pointer"
               @click="() => changeLang('ru')"
             >
               Русский
-            </div>
-            <div
+            </button>
+            <button
               class="hover:bg-gray-100 transition-all cursor-pointer"
               @click="() => changeLang('en')"
             >
               English
-            </div>
+            </button>
           </div>
         </div>
         <div class="flex gap-6 items-center">

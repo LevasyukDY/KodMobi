@@ -11,7 +11,7 @@
       },
       "auth_view": {
         "enter_phone": "Enter phone number",
-        "enter_phone_description": "For auth and register",
+        "enter_phone_description": "To login or register",
         "country_input": "Country",
         "phone_number_input": "Phone number",
         "continue": "Continue"
@@ -22,8 +22,8 @@
       },
       "verify_view": {
         "enter_code": "Enter code",
-        "enter_code_description": "Send on number",
-        "socials_input": "How to get the code",
+        "enter_code_description": "Sent to number",
+        "socials_input": "Method for obtaining the code",
         "btn_back": "Back",
         "btn_next": "Continue",
         "send_btn": "Send"

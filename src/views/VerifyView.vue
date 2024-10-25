@@ -131,7 +131,7 @@ const goNext = async () => {
         </InputText>
         <div class="absolute top-1/2 -translate-y-1/2 right-5">
           <button
-            class="text-[#007AFF] hover:text-[#3a99ff] transition-all font-medium"
+            class="text-[--primary-color] hover:text-[--primary-color-hover] transition-all font-medium"
             @click="sendCode"
             v-show="!isShowTimer"
           >
@@ -147,14 +147,14 @@ const goNext = async () => {
         <div class="h-[55px] w-full flex items-center justify-center gap-3">
           <img src="../assets/arrow-left.svg" alt="" />
           <button
-            class="bg-transparent text-[#007AFF] hover:text-[#3a99ff] transition-all font-medium"
+            class="bg-transparent text-[--primary-color] hover:text-[--primary-color-hover] transition-all font-medium"
             @click="goBack"
           >
             {{ $t("verify_view.btn_back") }}
           </button>
         </div>
         <button
-          class="bg-[#007AFF] text-white h-[55px] w-full rounded hover:bg-[#3a99ff] transition-all font-medium"
+          class="bg-[--primary-color] text-white h-[55px] w-full rounded hover:bg-[--primary-color-hover] transition-all font-medium"
           type="submit"
         >
           {{ $t("verify_view.btn_next") }}
