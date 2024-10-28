@@ -8,7 +8,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: #213547;
+  color: #000000;
   background-color: #ffffff;
 
   font-synthesis: none;
@@ -18,6 +18,8 @@
 
   --primary-color: #007aff;
   --primary-color-hover: #3a99ff;
+  --secondary-text-color: #666666;
+  --danger-color: #eb4036;
 }
 
 body {

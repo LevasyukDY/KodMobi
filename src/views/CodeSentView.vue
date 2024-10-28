@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { ISendResponse } from "../types/types.ts";
+import type { ISendResponse } from "../types/types.ts";
 
 const emit = defineEmits(["isShowCodeSentView"]);
 const props = defineProps<{ data: ISendResponse | null }>();
@@ -28,16 +28,19 @@ const checkStatus = async () => {
       class="w-[120px] h-[120px] mx-auto"
       :src="props.data?.channel.image_url"
     />
-    <h1 class="text-3xl font-medium text-black mt-[30px]">
+    <h1 class="text-3xl font-medium mt-[30px]">
       {{ props.data?.channel.name }}
     </h1>
     <p
       v-if="!isCheckBtnWasClicked"
-      class="mt-[14px] text-[#666] font-normal text-base"
+      class="mt-[14px] text-[--secondary-text-color] font-normal text-base"
     >
       {{ props.data?.channel.description }}
     </p>
-    <p v-else class="mt-[14px] text-[#eb4036] font-normal text-base">
+    <p
+      v-else
+      class="mt-[14px] text-[--danger-color] font-normal text-base"
+    >
       {{ $t("code_sent_view.description_after_check") }}
     </p>
     <div class="flex flex-col">
@@ -51,12 +54,15 @@ const checkStatus = async () => {
       <div class="mt-[20px]">
         <button
           class="text-[--primary-color] hover:text-[--primary-color-hover] transition-all font-medium"
-          v-show="isShowCheckBtn"
+          v-if="isShowCheckBtn"
           @click="checkStatus"
         >
           {{ $t("code_sent_view.check_status") }}
         </button>
-        <div class="loader" v-show="!isShowCheckBtn"></div>
+        <div
+          class="loader"
+          v-else
+        ></div>
       </div>
     </div>
     <img

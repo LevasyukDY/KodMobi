@@ -2,7 +2,7 @@
 import InputText from "primevue/inputtext";
 import InputMenu from "./InputMenu.vue";
 import FloatLabel from "primevue/floatlabel";
-import { ICountryCode } from "../types/types";
+import type { ICountryCode } from "../types/types";
 import { ref } from "vue";
 
 const { data, required } = defineProps(["data", "required"]);
@@ -34,7 +34,11 @@ const updateCountryValue = (el: ICountryCode) => {
         alt=""
       />
     </FloatLabel>
-    <InputMenu :data="data" :show="isShow" @update:value="updateCountryValue" />
+    <InputMenu
+      :data="data"
+      :show="isShow"
+      @update:value="updateCountryValue"
+    />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { TCountryCodes } from "../types/types";
+import type { TCountryCodes } from "../types/types";
 
 const { data, show } = defineProps<{ data: TCountryCodes; show: boolean }>();
 defineEmits(["update:value"]);
@@ -23,7 +23,7 @@ const filteredArray = computed<TCountryCodes>(() => {
 
 <template>
   <div
-    v-show="show"
+    v-if="show"
     class="km-scrollbar max-h-[319px] p-4 mt-1 w-full z-10 shadow-md shadow-gray-500 rounded bg-white absolute top-full left-0 overflow-y-auto"
   >
     <div class="relative mb-4">
@@ -38,15 +38,18 @@ const filteredArray = computed<TCountryCodes>(() => {
         v-model="searchQuery"
       />
       <img
-        v-show="searchQuery && searchQuery.length > 0"
+        v-if="searchQuery && searchQuery.length > 0"
         class="absolute w-4 h-4 top-1/2 -translate-y-1/2 right-3"
         src="../assets/clear.svg"
         @click="searchQuery = ''"
       />
     </div>
-    <span class="text-gray-400" v-show="filteredArray.length === 0">{{
-      $t("input_menu.nothing_found")
-    }}</span>
+    <span
+      class="text-gray-400"
+      v-if="filteredArray.length === 0"
+    >
+      {{ $t("input_menu.nothing_found") }}
+    </span>
 
     <button
       class="w-full h-[48px] px-3 flex items-center justify-between cursor-pointer hover:bg-gray-100 transition-all rounded-lg"
@@ -55,7 +58,7 @@ const filteredArray = computed<TCountryCodes>(() => {
       @click="$emit('update:value', el)"
     >
       <div class="flex items-center gap-2">
-        <img :src="el.img" alt="" />
+        <img :src="el.img" />
         <span class="text-left">{{ el.name }}</span>
       </div>
       <span class="font-bold">{{ el.dial_code }}</span>

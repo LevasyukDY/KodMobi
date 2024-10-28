@@ -2,9 +2,9 @@
 import axios from "axios";
 import InputText from "../components/InputText.vue";
 import InputList from "../components/InputList.vue";
-import { API_KEY } from "../config.ts";
+import { API_KEY } from "../config";
 import { onMounted, ref } from "vue";
-import { ICountryCode, ICreateResponse } from "../types/types";
+import type { ICountryCode, ICreateResponse } from "../types/types";
 
 const emit = defineEmits(["nextStep", "data"]);
 
@@ -73,10 +73,10 @@ onMounted(async () => {
 
 <template>
   <div>
-    <h1 class="text-3xl font-medium text-black mt-[30px]">
+    <h1 class="text-3xl font-medium mt-[30px]">
       {{ $t("auth_view.enter_phone") }}
     </h1>
-    <p class="mt-[14px] text-[#666] font-normal text-base">
+    <p class="mt-[14px] text-[--secondary-text-color] font-normal text-base">
       {{ $t("auth_view.enter_phone_description") }}
     </p>
 
@@ -99,9 +99,14 @@ onMounted(async () => {
       >
         {{ $t("auth_view.phone_number_input") }}
       </InputText>
+      <p
+        class="input_text-field_message ml-4 mt-1 text-[--danger-color] font-normal text-xs text-left"
+      >
+        {{ $t("auth_view.phone_field_message") }}
+      </p>
 
       <button
-        class="mt-[50px] bg-[--primary-color] text-white h-[55px] w-full rounded hover:bg-[--primary-color-hover] transition-all font-medium"
+        class="mt-[30px] bg-[--primary-color] text-white h-[55px] w-full rounded hover:bg-[--primary-color-hover] transition-colors font-medium"
         type="submit"
       >
         {{ $t("auth_view.continue") }}
@@ -109,3 +114,14 @@ onMounted(async () => {
     </form>
   </div>
 </template>
+
+<style scoped>
+.p-floatlabel-on:not(:has(.p-inputtext:invalid:enabled):has(.p-filled))
+  ~ .input_text-field_message {
+  @apply hidden;
+}
+.p-floatlabel-on:not(:has(.p-inputtext:invalid:enabled):has(.p-filled))
+  ~ button {
+  @apply mt-[50px];
+}
+</style>

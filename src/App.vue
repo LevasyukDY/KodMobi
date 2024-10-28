@@ -3,7 +3,7 @@ import AuthView from "./views/AuthView.vue";
 import VerifyView from "./views/VerifyView.vue";
 import CodeSentView from "./views/CodeSentView.vue";
 import { onMounted, ref } from "vue";
-import { i18n } from "./main.ts";
+import { i18n } from "./main";
 
 const isBeginOfAuth = ref(true);
 const data = ref(null);
@@ -34,33 +34,37 @@ onMounted(() => {
       class="relative w-[500px] h-[594px] rounded-[8px] border-[1px] pb-[24px] px-[29px]"
     >
       <div
-        class="h-[40px] w-[300px] mx-auto mt-[50px] text-gray-400 flex items-center justify-center"
+        class="h-[40px] w-[300px] mx-auto mt-[50px] bg-[#f8f8f8] text-gray-400 text-sm flex items-center justify-center"
       >
-        <!-- <p>{{ $t("app.logo") }}</p> -->
-        <img src="./assets/logo.svg" class="h-full" alt="" />
+        <p>{{ $t("app.logo") }}</p>
       </div>
 
       <AuthView
-        v-show="isBeginOfAuth"
+        v-if="isBeginOfAuth"
         @nextStep="(el) => (isBeginOfAuth = el)"
         @data="(el) => (data = el)"
       />
       <VerifyView
-        v-show="!isBeginOfAuth"
+        v-else
         @nextStep="(el) => (isBeginOfAuth = el)"
         @socialsData="(el) => (socialsData = el)"
         @isShowCodeSentView="(el) => (isShowCodeSentView = el)"
         :data="data"
       />
       <CodeSentView
-        v-show="isShowCodeSentView"
+        v-if="isShowCodeSentView"
         :data="socialsData"
         @isShowCodeSentView="(el) => (isShowCodeSentView = el)"
       />
 
-      <div class="mt-[70px] w-full flex justify-between items-center text-xs">
+      <div
+        class="mt-[70px] w-full flex justify-between items-center text-xs text-[--secondary-text-color]"
+      >
         <div class="flex gap-1 items-center relative">
-          <button @click="showLanguageMenu" class="cursor-pointer">
+          <button
+            @click="showLanguageMenu"
+            class="cursor-pointer"
+          >
             {{ $t("app.language") }}
           </button>
           <img
@@ -69,7 +73,7 @@ onMounted(() => {
             src="./assets/v-icon.svg"
           />
           <div
-            v-show="isShowLanguageMenu"
+            v-if="isShowLanguageMenu"
             class="bg-white w-full h-10 absolute left-0 top-5 shadow-md shadow-gray-400 rounded p-1 z-10"
           >
             <button
@@ -94,5 +98,3 @@ onMounted(() => {
     </div>
   </main>
 </template>
-
-<style scoped></style>

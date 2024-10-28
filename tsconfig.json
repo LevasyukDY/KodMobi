@@ -1,12 +1,18 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
   "compilerOptions": {
-    "moduleResolution": "node",
+    "noEmit": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "noImplicitThis": true,
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   }
 }

@@ -14,7 +14,8 @@
         "enter_phone_description": "To login or register",
         "country_input": "Country",
         "phone_number_input": "Phone number",
-        "continue": "Continue"
+        "continue": "Continue",
+        "phone_field_message": "Invalid number format"
       },
       "input_menu": {
         "search_placeholder": "Search",
@@ -26,7 +27,8 @@
         "socials_input": "Method for obtaining the code",
         "btn_back": "Back",
         "btn_next": "Continue",
-        "send_btn": "Send"
+        "send_btn": "Send",
+        "invalid_code": "Code entered incorrectly"
       },
       "code_sent_view": {
         "auth": "Login to the bot",
@@ -46,7 +48,8 @@
         "enter_phone_description": "Чтобы войти или зарегистрироваться",
         "country_input": "Страна",
         "phone_number_input": "Номер телефона",
-        "continue": "Продолжить"
+        "continue": "Продолжить",
+        "phone_field_message": "Неверный формат номера"
       },
       "input_menu": {
         "search_placeholder": "Поиск",
@@ -58,7 +61,8 @@
         "socials_input": "Способ получения кода",
         "btn_back": "Назад",
         "btn_next": "Продолжить",
-        "send_btn": "Отправить"
+        "send_btn": "Отправить",
+        "invalid_code": "Код введен неверно"
       },
       "code_sent_view": {
         "auth": "Авторизоваться в боте",
